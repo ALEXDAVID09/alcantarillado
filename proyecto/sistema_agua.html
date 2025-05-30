@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AquaSolution Quibdó - Gestión de Agua y Alcantarillado</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        :root {
+            --azul-profundo: #1a4480;
+            --azul-principal: #2563eb;
+            --azul-claro: #60a5fa;
+            --azul-suave: #dbeafe;
+            --verde-principal: #047857;
+            --verde-claro: #34d399;
+            --gris-oscuro: #1f2937;
+            --gris-medio: #4b5563;
+            --blanco: #ffffff;
+            --sombra: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --sombra-hover: 0 8px 25px rgba(37, 99, 235, 0.3);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f9fafb;
+            color: var(--gris-oscuro);
+            line-height: 1.6;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--azul-profundo), var(--azul-principal));
+            color: var(--blanco);
+            padding: 16px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--sombra);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 24px;
+            font-weight: 800;
+        }
+
+        .logo-icon {
+            width: 35px;
+            height: 35px;
+            background: linear-gradient(135deg, var(--azul-claro), var(--verde-claro));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: var(--blanco);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Botones Mejorados */
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
+            text-transform: none;
+            letter-spacing: 0.025em;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--azul-principal), var(--azul-claro));
+            color: var(--blanco);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+            border: 2px solid transparent;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--azul-claro), var(--verde-claro));
+            transform: translateY(-3px);
+            box-shadow: var(--sombra-hover);
+        }
+
+        .btn-primary:active {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(37, 99, 235, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--blanco);
+            border: 2px solid var(--blanco);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-outline:hover {
+            background: var(--blanco);
+            color: var(--azul-principal);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-outline:active {
+            transform: translateY(0);
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, var(--azul-profundo), var(--verde-principal));
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            color: var(--blanco);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .hero-description {
+            font-size: 18px;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn-hero {
+            padding: 16px 32px;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        /* Features */
+        .features {
+            padding: 80px 0;
+            background: var(--blanco);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .section-subtitle {
+            color: var(--azul-principal);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: var(--blanco);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: var(--sombra);
+            transition: transform 0.3s ease;
+            border: 1px solid var(--azul-suave);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--azul-suave);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--gris-oscuro);
+            color: var(--blanco);
+            padding: 40px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-column h3 {
+            color: var(--azul-claro);
+            margin-bottom: 15px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: 8px;
+        }
+
+        .footer-column a {
+            color: #d1d5db;
+            text-decoration: none;
+        }
+
+        .footer-column a:hover {
+            color: var(--azul-claro);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #374151;
+            padding-top: 20px;
+            text-align: center;
+            color: #9ca3af;
+        }
+
+        .author-credit {
+            margin-top: 20px;
+            padding: 15px 20px;
+            background: linear-gradient(135deg, var(--azul-principal), var(--verde-principal));
+            border-radius: 10px;
+            display: inline-block;
+        }
+
+        .author-credit p {
+            color: var(--blanco);
+            margin: 0;
+        }
+
+        .author-name {
+            font-weight: 800;
+            font-size: 16px;
+            color: var(--azul-claro);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero { padding: 40px 0; text-align: center; }
+            .features { padding: 60px 0; }
+            .hero-buttons { flex-direction: column; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <div class="logo-icon">💧</div>
+                    <span>AquaSolution</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+                <div>
+                    <a href="login.php" class="btn btn-outline">Iniciar Sesión</a>
+                    <a href="registro.php" class="btn btn-primary">Registrarse</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero" id="inicio">
+        <div class="container">
+            <div>
+                <h1>Gestión Moderna de Agua y Alcantarillado</h1>
+                <p class="hero-description">Transformamos la infraestructura hídrica de Quibdó con tecnología sostenible, garantizando agua potable de calidad para toda la comunidad chocoana.</p>
+                <div class="hero-buttons">
+                    <a href="registro.php" class="btn btn-primary btn-hero">Comenzar Ahora</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="servicios">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-subtitle">NUESTROS SERVICIOS</div>
+                <h2 class="section-title">Soluciones para Quibdó</h2>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🚰</div>
+                    <h3>Tratamiento de Agua</h3>
+                    <p>Sistemas de purificación adaptados al clima húmedo de Quibdó, garantizando agua segura.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔧</div>
+                    <h3>Gestión de Alcantarillado</h3>
+                    <p>Redes resistentes a las altas precipitaciones características de la región.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Monitoreo en Tiempo Real</h3>
+                    <p>Tecnología IoT para supervisión continua de calidad y funcionamiento.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌱</div>
+                    <h3>Sostenibilidad Ambiental</h3>
+                    <p>Prácticas eco-friendly que protegen la biodiversidad del Chocó.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contacto">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>AquaSolution Quibdó</h3>
+                    <p>Liderando la transformación de la infraestructura hídrica en el Chocó con soluciones innovadoras y sostenibles.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Servicios</h3>
+                    <ul>
+                        <li><a href="#">Tratamiento de Agua</a></li>
+                        <li><a href="#">Alcantarillado</a></li>
+                        <li><a href="#">Monitoreo</a></li>
+                        <li><a href="#">Emergencias 24/7</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contacto</h3>
+                    <ul>
+                        <li>Carrera 1 # 25-08, Centro</li>
+                        <li>Quibdó, Chocó</li>
+                        <li>Tel: (4) 671-1234</li>
+                        <li>info@aquasolution.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 AquaSolution Quibdó. Todos los derechos reservados.</p>
+                <div class="author-credit">
+                    <p>🎓 Proyecto desarrollado por</p>
+                    <p class="author-name">ALEX DAVID GARCÍA CHALA</p>
+                    <p style="font-size: 14px; opacity: 0.9;">5° Semestre • Metodología de la Investigación</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function scrollTo(elementId) {
+            document.getElementById(elementId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+    </script>
+</body>
+</html>
